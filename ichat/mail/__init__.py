@@ -1,5 +1,5 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
-from .core import Postman
+from .postman import Postman
 
 __all__ = ['Postman']

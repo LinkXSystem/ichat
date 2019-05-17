@@ -91,3 +91,6 @@ ENV/
 
 # project's config
 docs/conf.py
+
+# idea project
+.idea

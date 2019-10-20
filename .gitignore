@@ -91,3 +91,7 @@ ENV/
 
 # idea project
 .idea
+
+# ichat's file
+
+.pkl

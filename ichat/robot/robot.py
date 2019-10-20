@@ -1,34 +1,27 @@
-# import itchat
-#
-# message = 'Hello, World!'
-#
-# user = 'filehelper'
-#
-# itchat.auto_login(enableCmdQR=False, hotReload=True)
-#
-# itchat.send(message, toUserName=user)
+from .command import Command
 
-# import itchat
-#
-# newInstance = itchat.new_instance()
-# newInstance.auto_login(hotReload=True, statusStorageDir='robot.pkl')
-#
-#
-# @newInstance.msg_register(itchat.content.TEXT)
-# def reply(msg):
-#     return msg.text
-#
-#
-# newInstance.run()
 
-# import itchat
-#
-#
-# @itchat.msg_register(itchat.content.TEXT)
-# def text_reply(msg):
-#     print(msg)
-#     return msg.text
-#
-#
-# itchat.auto_login()
-# itchat.run()
+class Robot:
+    def __init__(self):
+        self.options = {}
+        self.behaviors = Command()
+
+    def register(self, options):
+        self.options = self.options.update(options)
+
+    def flow(self, message):
+        text = message['Text']
+
+        if Command.valid(':', text):
+            return self.action(Command.split(':', text))
+
+        return self.reply()
+
+    def reply(self):
+        return 'This is robot !!!'
+
+    def action(self, command):
+        if not self.behaviors.has(command):
+            return self.behaviors.commands['notfound']()
+
+        return self.behaviors.commands[command]()
